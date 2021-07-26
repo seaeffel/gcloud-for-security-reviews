@@ -39,6 +39,12 @@ To identify which project has a specific API enabled, run the following (here th
   
 # IAM Review
 
+## To investigate which users have permissions assigned directly to them: 
+  
+    for i in $(gcloud projects list | awk '{print $1}' | awk 'NR>1'); do echo PROJECT: $i && echo "--" && gcloud asset search-all-iam-policies --scope=projects/$i | grep user\: && echo ""; done
+    
+Note: This command doesn't list users that have permissions on the project that have been inherited from IAM policies configured at parent folder or the organisation level. This only describes user <> role bindings configured at the project level.
+
 ## To find which IAM policies a certain user has in a project:
 
     gcloud asset search-all-iam-policies --scope=projects/<PROJECT NAME> --query="policy:"<EMAIL ADDRESS>"
@@ -106,12 +112,4 @@ Note: Firewall rules on GCP are configured with network tags which are applied t
 
     gcloud compute instances list --filter="tags.item=<insert network tag>"
    
-    
-# Work in Progress
-
-## To investigate which users have permissions assigned directly to them: [DRAFT]
-  
-    for i in $(gcloud projects list | awk '{print $1}' | awk 'NR>1'); do echo PROJECT: $i && echo "--" && gcloud asset search-all-iam-policies --scope=projects/$i | grep
-    
-Note: This command doesn't list users that have permissions on the project that have been inherited from IAM policies configured at parent folder or the organisation level. This only describes user <> role bindings configured at the project level.
   
