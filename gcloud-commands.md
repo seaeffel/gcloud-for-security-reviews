@@ -1,35 +1,5 @@
 # Org Policy Review
 
-## Listing Org Policies configured at Folder Level 0.
-
-```for i in $(gcloud resource-manager folders list --organization=ORG_ID | grep -o '[[:digit:]]*' | grep -v "ORG_ID" | awk '$0~length($0)==12' | awk '{print $1}' | awk 'NR>1'); do echo FOLDER: $i && echo "--" && gcloud resource-manager org-policies list --folder=$i && echo ""; done```
-
-The 'gcloud resource-manager folders list command' needed to obtain a list of Folder IDs is a bit messy due to the naming convention of the folders in the GCP environment that I was working on. In order to obtain the list of folder IDs, i needed to pipe the following onto the gcloud command;
-
-### 1. Pick out strings that are only digits
-    
-```grep -o '[[:digit:]]*'```
-    
-### 2. Remove the "org ID" results
-    
-```grep -v "ORG_ID"```
-
-### 3. Extract only numeric fields of length 12 
-    
-```awk '$0~length($0)==12'```
-    
-The above was necessary as numbers in the project_id column were being displayed.
-
-The 'gcloud resource-manager folders list' command was a little more complex than usually necessary due to the naming convention of the folders which meant that the output of the command in column format would be skewed due to the name of some folders being displayed in multiple columns. If there were no spaces in the names of the folders then you could attempt this which would print the third column only i.e. the column with the folder IDs.
-
-```gcloud resource-manager folders list --organization=ORG_ID | awk '{print $3}' | awk 'NR>1')```
-    
-So that the command to list the org-policies configured at folder level 0 would be;
-
-```for i in $(gcloud resource-manager folders list --organization=ORG_ID | awk '{print $3}' | awk 'NR>1'); do echo FOLDER: $i && echo "--" && gcloud resource-manager org-policies list --folder=$i && echo ""; done```
-
-NB. This command can be improved by including the folder name.
-
 ## Listing Org Policies configured at all folder levels.
 
 Alternatively run the shell script [folders-list.sh](./folders-list.sh), (modify the script in order to output only the folder IDs) save the output locally then run the following command to obtain the org-policies configured at project-level across the organisation.
