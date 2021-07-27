@@ -30,7 +30,7 @@ So that the command to list the org-policies configured at folder level 0 would 
 
 ## Listing the configuration of org-policies that are configured at the org-level
 
-```for i in $(gcloud resource-manager org-policies list --organization=<ORG_ID> | awk '{print $1}' | grep -v CONSTRAINT| awk 'NR>1'); do echo ORG-POLICY: $i && echo "--" && gcloud resource-manager org-policies describe $i --organization=<ORG_ID> && echo ""; done```
+```for i in $(gcloud resource-manager org-policies list --organization=<ORG_ID> | awk '{print $1}' | awk 'NR>1'); do echo ORG-POLICY: $i && echo "--" && gcloud resource-manager org-policies describe $i --organization=<ORG_ID> && echo ""; done```
 
 # Resource Management
 
