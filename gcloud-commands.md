@@ -30,6 +30,14 @@ So that the command to list the org-policies configured at folder level 0 would 
 
 NB. This command can be improved by including the folder name.
 
+## Listing Org Policies configured at all folder levels.
+
+Alternatively run the shell script [folders-list.sh](./folders-list.sh), (modify the script in order to output only the folder IDs) save the output locally then run the following command to obtain the org-policies configured at project-level across the organisation.
+
+```for i in $(cat folders.txt); do echo FOLDER: $i && echo "--" && gcloud resource-manager org-policies list --folder=$i && echo ""; done```
+
+This is very useful in order to identify where org-policies that should be inherited from the organisation level may have been customised to have a different configuration. This type of thing should be investigated to ensure there is a legitimate business justification for not inheriting the policy configuration of a parent resource.
+
 ## Listing the configuration of org-policies that are configured at the org-level
 
 ```for i in $(gcloud resource-manager org-policies list --organization=<ORG_ID> | awk '{print $1}' | awk 'NR>1'); do echo ORG-POLICY: $i && echo "--" && gcloud resource-manager org-policies describe $i --organization=<ORG_ID> && echo ""; done```
