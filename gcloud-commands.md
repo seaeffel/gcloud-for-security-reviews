@@ -42,6 +42,12 @@ This is very useful in order to identify where org-policies that should be inher
 
 ```for i in $(gcloud resource-manager org-policies list --organization=<ORG_ID> | awk '{print $1}' | awk 'NR>1'); do echo ORG-POLICY: $i && echo "--" && gcloud resource-manager org-policies describe $i --organization=<ORG_ID> && echo ""; done```
 
+## Listing the configuration of org-policies that are configured at project level
+
+You will want to ensure you aren't reviewing the org-policies for the 'apps-script' projects as there are alot of them so ensure to add the filter to remove all projects under the APPS_SCRIPT folder.
+
+```for i in $(gcloud projects list --filter="NOT parent.id:<APPS_SCRIPT_FOLDER_ID>"| awk '{print $1}'| awk 'NR>1'); do echo PROJECT: $i && echo "--" && gcloud resource-manager org-policies list --project=$i && echo ""; done```
+
 # Resource Management
 
 ## Identifying enabled APIs
