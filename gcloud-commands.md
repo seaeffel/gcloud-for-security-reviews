@@ -65,6 +65,17 @@ Note: This command doesn't list users that have permissions on the project that 
     
 Note: The above command does not search object-level permissions for gmail accounts.
 
+## Debugging Quota limits
+
+### To identify the number of IAM Bindings;
+
+```gcloud projects get-iam-policy $PROJECT_ID --format=json | jq '.bindings | length'``` OR
+```gcloud organizations get-iam-policy <ORG_ID> --format=json | jq '.bindings | length'```
+
+### To list (non-unique) members of IAM Bindings;
+
+```gcloud projects get-iam-policy $PROJECT_ID --format=json | jq ".bindings[].members" | jq -s flatten```
+
 # Network Security
 
 ## Identifying which subnets have VPC Flow Logs enabled
