@@ -67,9 +67,7 @@ Note: The above command does not search object-level permissions for gmail accou
 
 ## Debugging Quota limits
 
-### To identify the number of IAM Bindings (counts the unique members of an IAM Policy).
-
-Note that the count also includes two brackets. You can use grep to remove these in the count or just take this into consideration.
+### To identify the number of IAM Bindings (counts the member(s)<>role bindings in an IAM Policy)
 
 ```gcloud projects get-iam-policy $PROJECT_ID --format=json | jq '.bindings | length'``` OR
 ```gcloud organizations get-iam-policy <ORG_ID> --format=json | jq '.bindings | length'```
