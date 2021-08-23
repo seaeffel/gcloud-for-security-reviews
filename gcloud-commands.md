@@ -76,6 +76,10 @@ Note: The above command does not search object-level permissions for gmail accou
 
 ```gcloud projects get-iam-policy $PROJECT_ID --format=json | jq ".bindings[].members" | jq -s flatten```
 
+### To list unique members of IAM Bindings;
+
+```gcloud organizations get-iam-policy <ORG_ID> --format=json | jq ".bindings[].members" | jq -s flatten | sort | uniq -c | sort -nr```
+
 # Network Security
 
 ## Identifying which subnets have VPC Flow Logs enabled
