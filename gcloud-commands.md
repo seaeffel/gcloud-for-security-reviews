@@ -54,6 +54,10 @@ Note: This command doesn't list users that have permissions on the project that 
 ## Does (USER EMAIL) have the owner role?
 
 ```gcloud asset search-all-iam-policies --scope=organizations/<ORG NUMBER> --query="policy:roles/owner <USER EMAIL>"```
+
+## Who has role X?
+
+```gcloud asset search-all-iam-policies --scope=organizations/<ORG NUMBER> --query="policy:roles/<role>"```
     
 ## What is the IAM policy for a given resource type?
 
