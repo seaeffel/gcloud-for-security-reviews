@@ -97,7 +97,7 @@ By default, VPC Flow Logs are disabled. The output of the command above displays
 
 ### Entire GCP estate
 
-```for i in $(gcloud projects list | awk '{print $1}' | awk 'NR>1'); do echo PROJECT: $i && echo "--" && gcloud conmpute networks subnets list --filter='logConfig.enable=True' --format="table[box,title=FlowLoggingDisabled](name,enableFlowLogs,logConfig.enable:label=logging)" --project=$i && echo ""; done```
+```for i in $(gcloud projects list | awk '{print $1}' | awk 'NR>1'); do echo PROJECT: $i && echo "--" && gcloud compute networks subnets list --filter='logConfig.enable=True' --format="table[box,title=FlowLoggingDisabled](name,enableFlowLogs,logConfig.enable:label=logging)" --project=$i && echo ""; done```
   
 Note: To list all subnets in all projects, rmeove the filter so that the output shows all subnets and whether or not they are logging VPC Flow Logs.
 
