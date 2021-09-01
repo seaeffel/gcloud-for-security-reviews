@@ -90,6 +90,14 @@ By default, Viewers inherit roles/storage.legacyObjectReader if buckets are conf
 
 ```gcloud organizations get-iam-policy <ORG_ID> --format=json | jq ".bindings[].members" | jq -s flatten | sort | uniq -c | sort -nr```
 
+# Cloud Storage 
+
+## To identify the access control of Cloud Storage Buckets in a project
+
+```for i in $(gsutil ls | awk '{print $1}' | awk 'NR>1'); do echo ACL: $i && echo "--" && gsutil ubla get $i&& echo ""; done```
+
+Note: The command above needs to be improved to identify any buckets in the gcp estate that do not have uniform bucket-level access enabled
+
 # Network Security
 
 ## Identifying which subnets have VPC Flow Logs enabled
