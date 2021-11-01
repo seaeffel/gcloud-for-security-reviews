@@ -24,7 +24,7 @@ You will want to ensure you aren't reviewing the org-policies for the 'apps-scri
 
 To identify which project has a specific API enabled, run the following (here the Web Scanner API was investigated);
 
-```for i in $(gcloud projects list | awk '{print $1}' | awk 'NR>1'); do echo PROJECT: $i && echo "--" && gcloud services list --project=$i --filter="(websecurityscanner.googleapis.com)" && echo ""; done```
+```for i in $(gcloud projects list --filter=<ORG_ID> |  awk '{print $1}'); do echo "Project -- $i" && gcloud services list --project=$i --filter='cloudkms.googleapis.com' && echo ""; done 2>&1```
 
   
 # IAM Review
