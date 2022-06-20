@@ -75,6 +75,23 @@ By default, Viewers inherit roles/storage.legacyObjectReader if buckets are conf
 
 ```gcloud asset search-all-iam-policies --scope=organizations/388347670233 --query="policy:roles/storage.legacyObjectReader" | grep projectViewer```
 
+## List all recommendations in a project and describe them
+
+```#!/bin/bash
+
+GET_REC_ID=$(gcloud recommender recommendations list --location=global --recommender=google.iam.policy.Recommender --project=<PROJECT_NAME> | grep "RECOMMENDATION_ID" | awk '{print $2}')
+
+for get_details in $(echo ${GET_REC_ID})
+  do
+    echo -e "\nRECOMMENDATION_ID: ${get_details}\n"
+
+    gcloud recommender recommendations describe "${get_details}" --project=<PROJECT_NAME> --location=global --recommender=google.iam.policy.Recommender
+
+    echo -e "\n"
+done
+```
+
+
 ## Debugging Quota limits
 
 ### To identify the number of IAM Bindings (counts the member(s)<>role bindings in an IAM Policy)
