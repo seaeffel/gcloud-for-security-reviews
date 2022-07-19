@@ -73,7 +73,7 @@ Note: The above command does not search object-level permissions for gmail accou
 
 By default, Viewers inherit roles/storage.legacyObjectReader if buckets are configured with Uniform Bucket Level access considered [Convenience values](https://cloud.google.com/storage/docs/access-control/iam-roles#basic-roles-modifiable). To determine if Viewers of projects are able to view data within the projects run the following command to list the projects;
 
-```gcloud asset search-all-iam-policies --scope=organizations/388347670233 --query="policy:roles/storage.legacyObjectReader" | grep projectViewer```
+```gcloud asset search-all-iam-policies --scope=organizations/<ORG_ID> --query="policy:roles/storage.legacyObjectReader" | grep projectViewer```
 
 ## List all recommendations in a project and describe them
 
